@@ -17,45 +17,26 @@ pipeline {
     }
 
     stages {
-        stage('Configure Build Containers') {
-            when { expression { currentBuild.currentResult == 'SUCCESS' } }
+        stage('Configure Environment') {
             steps {
-              container('python') {
-                 sh """
-                    pwd
-                    env
-		    source /usr/src/venv/bin/activate
-		    python -m build
-                 """
-              }
+                container('jnlp') {
+                    sh './build.sh -e'
+                }
             }
         }
 
-        stage('Push Package') {
-            when {
-                allOf {
-                    expression { currentBuild.currentResult == 'SUCCESS' }
-                    anyOf {
-                        branch 'main'
-                    }
-                }
-            }
+        stage('Build Container') {
             steps {
-              container('python') {
-                withCredentials([usernamePassword(credentialsId: '1a69cdbb-be20-4bde-b30a-87ef9b2db969', passwordVariable: 'TWINE_PASSWORD', usernameVariable: 'TWINE_USERNAME')]) {
-                  sh """
-		    source /usr/src/venv/bin/activate
-	            python -m twine upload --verbose --disable-progress-bar --non-interactive  --repository devpi ./dist/* --config-file $PYPIRC_FILE
-                  """
+                container('kaniko') {
+                    sh './kaniko.sh'
                 }
-              }
             }
         }
     }
 
-//    post {
-//        always {
-//            kafkaBuildReporter()
-//        }
-//    }
+    post {
+        always {
+            kafkaBuildReporter()
+        }
+    }
 }

@@ -32,7 +32,7 @@ spec:
       image:  registry.ubuntu.home/gcr.io/kaniko-project/executor:v1.24.0.debug
       imagePullPolicy: Always
       command:
-        - /bin/cat
+        - /busybox/cat
       resources:
         limits:
           cpu: 400m
@@ -45,9 +45,19 @@ spec:
       volumeMounts:
         - name: workspace-volume
           mountPath: /home/jenkins/agent
+        - name: dockerconfigjson
+          mountPath: /kaniko/.docker/config.json
+          readOnly: true
+          subPath: config.json
       workspace: /home/jenkins/agent
   imagePullSecrets:
     - name: regcred
   volumes:
     - name: workspace-volume
       emptyDir: {}
+    - name: dockerconfigjson
+      secret:
+        secretName: regcred
+        items:
+          - key: .dockerconfigjson
+            path: config.json

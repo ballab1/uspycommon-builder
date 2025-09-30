@@ -115,7 +115,7 @@ if [ ! -f '.env' ]; then
     exit 1
 fi
 
-. .env
+. ./.env
 
 # show pretty version of the command
 echo $(build) | sed -E -e 's| --| \\\n   --|g'
