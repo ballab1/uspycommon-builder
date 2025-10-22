@@ -16,3 +16,5 @@ unittest.xml
 **/*.egg-info/**
 **/.env
 logs*
+containerBuildPod.yaml
+BuilderEnvContainer-docker.Jenkinsfile

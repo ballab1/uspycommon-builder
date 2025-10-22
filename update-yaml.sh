@@ -14,11 +14,11 @@ function main()
 
 #--------------------------------------------------------------------------------
 
-if [ -e ci.bashlib ]; then
-  source ci.bashlib
+if [ -e ci/ci.bashlib ]; then
+  source ci/ci.bashlib
  elif [ -e ci.bashlib ] && [ "$(basename "$(pwd)")" = 'ci' ]; then
   cd ..
-  source ci.bashlib
+  source ci/ci.bashlib
 else
   echo 'cannot execute this script from current directory'
   exit
