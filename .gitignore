@@ -16,3 +16,4 @@ unittest.xml
 **/*.egg-info/**
 **/.env
 logs*
+containerBuildPod-1.yaml

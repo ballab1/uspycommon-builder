@@ -20,7 +20,7 @@ pipeline {
         stage('Configure Environment') {
             steps {
                 container('jnlp') {
-                    sh './build.sh -e'
+                    updateDependentFiles('project.settings')
                 }
             }
         }
@@ -28,7 +28,7 @@ pipeline {
         stage('Build Container') {
             steps {
                 container('kaniko') {
-                    sh './kaniko.sh'
+                    kanikoCmdLine()
                 }
             }
         }
