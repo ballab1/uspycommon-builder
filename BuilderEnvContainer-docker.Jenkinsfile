@@ -6,7 +6,6 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'registry.ubuntu.home/alpine/python/3.13.2'
-        DOCKER_TAG = "${env.BUILD_NUMBER}"
         DOCKER_REGISTRY = 'registry.ubuntu.home'  // e.g., index.docker.io or registry.example.com
         DOCKER_CREDENTIALS_ID = '1a69cdbb-be20-4bde-b30a-87ef9b2db969'
     }
@@ -15,6 +14,7 @@ pipeline {
         stage('Build Image') {
             steps {
                 script {
+                    env.DOCKER_TAG = getTag()
                     docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}", 'ci')
                 }
             }
