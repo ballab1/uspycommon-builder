@@ -12,7 +12,7 @@ spec:
     - "s3.ubuntu.home"
   containers:
     - name: jnlp
-      image: registry.ubuntu.home/alpine/jenkins/inbound-agent/3345.v03dee9b_f88fc-1-alpine-jdk21:7988abe9
+      image: registry.ubuntu.home/alpine/jenkins/inbound-agent/3345.v03dee9b_f88fc-1-alpine-jdk21:92e93bb8
       imagePullPolicy: Always
       resources:
         limits:
