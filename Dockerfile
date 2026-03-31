@@ -1,4 +1,4 @@
-ARG FROM_BASE="${FROM_BASE:-${DOCKER_REGISTRY}docker.io/python:3.13.2-alpine3.21}"
+ARG FROM_BASE="${FROM_BASE:-${DOCKER_REGISTRY}docker.io/python:3.13.10-alpine3.21}"
 FROM $FROM_BASE
 
 LABEL Maintainers="bobb@k8s.home"

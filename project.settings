@@ -4,6 +4,8 @@
 env:
     OS_VERSION: '3.21'
     PYTHON_VERSION: '3.13.2'
+    PIP_VERSION: '24.3.1'
+
     CONTAINER_OS: 'alpine'
     BASE_TAG: "${PYTHON_VERSION}-${CONTAINER_OS}${OS_VERSION}"
     CONTAINER_NAME: "python/${BASE_TAG}"
